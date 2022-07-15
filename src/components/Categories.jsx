@@ -10,6 +10,7 @@ const categoriesList = [
 ];
 
 function Categories() {
+  
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
