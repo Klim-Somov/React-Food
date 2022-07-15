@@ -9,8 +9,9 @@ const categoriesList = [
   "Закрытые",
 ];
 
+
 function Categories() {
-  
+
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
