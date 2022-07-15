@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const poupList = ["популярности", "цене", "алфавиту"];
 
 function Sort() {
-  const [activeCategory, setActiveCategory] = useState(0);
+  const [activeCategory, setActiveCategory] = useState(1);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const onClickHendl = (i) => {
