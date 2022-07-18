@@ -14,10 +14,10 @@ function Home() {
         setitems(arr);
         setoading(true);
       });
+      window.scrollTo(0, 0);
   }, []);
   return (
     <>
-
       <div className="content__top">
         <Categories />
         <Sort />

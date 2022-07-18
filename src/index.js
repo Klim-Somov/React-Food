@@ -6,8 +6,8 @@ import App from "./App";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
-const container = document.getElementById("root");
-const root = createRoot(container);
+ 
+const root = createRoot(document.getElementById("root"));
 
 root.render(
  
@@ -18,3 +18,4 @@ root.render(
     </Provider>
   
 );
+ 

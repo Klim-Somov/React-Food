@@ -1,11 +1,14 @@
 import React from "react";
 import logoSvg from "../assets/img/pizza-logo.svg";
 import {Link} from "react-router-dom"
-function Header() {
+import Search from "./Search/Search";
+
+
+function Header({searchValue, setSearchValue}) {
   return (
     <div className="header">
       <div className="container">
-      <Link to="/">
+      <Link className="header__left" to="/">
           <div className="header__logo">
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
@@ -14,9 +17,10 @@ function Header() {
             </div>
           </div>
       </Link >
+      <Search searchValue = {searchValue} setSearchValue={setSearchValue} />
    <Link to="/cart">
           <div className="header__cart">
-            <a href="/cart.html" className="button button--cart">
+            <div className="button button--cart">
               <span>520 ₽</span>
               <div className="button__delimiter"></div>
               <svg
@@ -49,7 +53,7 @@ function Header() {
                 />
               </svg>
               <span>3</span>
-            </a>
+            </div>
           </div>
    </Link>
       </div>
