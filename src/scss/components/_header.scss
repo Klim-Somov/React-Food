@@ -1,13 +1,18 @@
-@import '../variables';
+@import "../variables";
 
 .header {
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
+  display: flex;
 
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 500px) {
+      flex-direction: column;
+      gap: 20px;
+    }
   }
 
   &__logo {
