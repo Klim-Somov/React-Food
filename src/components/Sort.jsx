@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { setSortType } from "../features/filterSlice";
 
 
-function Sort({ onClickSort}) {
+function Sort() {
 
   const sortObject = useSelector(state => state.filter.sort)
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ function Sort({ onClickSort}) {
     dispatch(setSortType(obj))
     setIsPopupOpen(false);
   };
-  
+
   return (
     <div className="sort">
       <div className="sort__label">

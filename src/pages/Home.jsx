@@ -6,7 +6,7 @@ import PizzaBlock from "../components/PizzaBlock";
 import Sort from "../components/Sort";
 import Pagination from "../pagination/Pagination";
 function Home({ searchValue }) {
-  
+
   const [items, setitems] = useState([]);
   const [loading, setLoading] = useState(false);
   const sortObject = useSelector((store) => store.filter.sort);
@@ -38,7 +38,7 @@ function Home({ searchValue }) {
       <div className="content__items">
         {loading
           ? pizzas
-          : [...new Array(6)].map((_, index) => <Loader key={index} />)}
+          : [...new Array(9)].map((_, index) => <Loader key={index} />)}
       </div>
       <Pagination />
     </>

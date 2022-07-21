@@ -10,6 +10,7 @@ const filterSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
+    
     setSortType: (state, { payload }) => {
       state.sort = payload;
     },
