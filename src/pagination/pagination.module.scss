@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  width: 300px;
+  margin: 0 auto;
+  :global {
+    .previous {
+      background-color: red;
+    }
+  }
+}
