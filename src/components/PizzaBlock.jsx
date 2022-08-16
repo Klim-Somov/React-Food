@@ -31,21 +31,21 @@ function PizzaBlock({ id, name, price, imageUrl, types, sizes }) {
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {types.map((type, i) => (
+          {types.map((type) => (
             <li
-              onClick={() => setactiveSize(i)}
-              className={activeSize === i ? "active" : ""}
+              onClick={() => setactiveType(type)}
+              className={activeType === type ? "active" : ""}
               key={type}
             >
-              {typeNames[type]}{" "}
+              {typeNames[type]}
             </li>
           ))}
         </ul>
         <ul>
           {sizes.map((size, i) => (
             <li
-              onClick={() => setactiveType(i)}
-              className={activeType === i ? "active" : ""}
+              onClick={() => setactiveSize(i)}
+              className={activeSize === i ? "active" : ""}
               key={size}
             >
               {size} см.
