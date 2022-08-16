@@ -19,11 +19,15 @@ function Sort() {
   };
 
   useEffect(() => {
-    document.addEventListener("click", (e) => {
+    const hendleClickOutside = (e) => {
       if (!e.path.includes(sortRef.current)) {
         setIsPopupOpen(false);
       }
-    });
+    };
+    document.body.addEventListener("click", hendleClickOutside);
+    return () => {
+      document.body.removeEventListener("click", hendleClickOutside);
+    };
   }, []);
 
   return (
