@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartPizzas from "../components/CartPizzas";
+import { clearItems } from "../features/cartSlice";
 
 function Cart() {
   const pizzas = useSelector((state) => state.cart.items);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
-  console.log(pizzas);
+
+  const [totalCount, setTotalCount] = useState(
+    pizzas.reduce((sum, item) => sum + item.count, 0)
+  );
+  const hendlDelite = () => {
+    dispatch(clearItems())
+    setTotalCount('0');
+  };
+  const dispatch = useDispatch();
   return (
     <div className="content">
       <div className="container container--cart">
@@ -81,7 +90,9 @@ function Cart() {
                 />
               </svg>
 
-              <span>Очистить корзину</span>
+              <span onClick={hendlDelite}>
+                Очистить корзину
+              </span>
             </div>
           </div>
           <div className="content__items">
@@ -95,7 +106,7 @@ function Cart() {
         <div className="cart__bottom-details">
           <span>
             {" "}
-            Всего пицц: <b>{pizzas.length} шт.</b>{" "}
+            Всего пицц: <b>{totalCount} шт.</b>{" "}
           </span>
           <span>
             {" "}
