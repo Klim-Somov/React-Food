@@ -9,20 +9,17 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-   
     addItem: (state, { payload }) => {
-      state.items.push(payload) ;
-      state.totalPrice+=payload.price
+      state.items.push(payload);
+      state.totalPrice += payload.price;
     },
     removeItem: (state, { payload }) => {
-      state.items = state.items.filter(obj => obj.id !== payload);
+      state.items = state.items.filter((obj) => obj.id !== payload);
     },
     clearItems: (state) => {
-      state.items =[];
+      state.items = [];
     },
-
   },
 });
-export const { setCategoryId, setSortType, addItem, cartCount, clearItems, removeItem } =
-  cartSlice.actions;
+export const { addItem, clearItems, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

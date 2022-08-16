@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import {useSelector, useDispatch} from 'react-redux'
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { setSortType } from "../features/filterSlice";
 
-
 function Sort() {
-
-  const sortObject = useSelector(state => state.filter.sort)
-  const dispatch = useDispatch()
+  const sortObject = useSelector((state) => state.filter.sort);
+  const dispatch = useDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const sortRef = React.useRef();
   const poupList = [
     { name: "популярности", sortProperty: "rating" },
     { name: "цене", sortProperty: "price" },
@@ -15,12 +14,20 @@ function Sort() {
   ];
 
   const onClickHendl = (obj) => {
-    dispatch(setSortType(obj))
+    dispatch(setSortType(obj));
     setIsPopupOpen(false);
   };
 
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (!e.path.includes(sortRef.current)) {
+        setIsPopupOpen(false);
+      }
+    });
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -35,7 +42,9 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsPopupOpen(!isPopupOpen)}>{sortObject.name}</span>
+        <span onClick={() => setIsPopupOpen(!isPopupOpen)}>
+          {sortObject.name}
+        </span>
       </div>
       {isPopupOpen && (
         <div className="sort__popup">
@@ -45,7 +54,9 @@ function Sort() {
                 <li
                   onClick={() => onClickHendl(obj)}
                   key={i}
-                  className={sortObject.sortProperty === obj.sortProperty? "active" : ""}
+                  className={
+                    sortObject.sortProperty === obj.sortProperty ? "active" : ""
+                  }
                 >
                   {obj.name}
                 </li>

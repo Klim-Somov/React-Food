@@ -24,6 +24,7 @@ function Home({ searchValue }) {
       .then((arr) => {
         setitems(arr);
         setLoading(true);
+        console.log(arr);
       });
     window.scrollTo(0, 0);
   }, [searchValue, categoryId, sortObject]);
