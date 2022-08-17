@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CartPizzas from "../components/CartPizzas";
+import CartItem from "../components/CartItem";
 import { clearItems } from "../features/cartSlice";
 
 function Cart() {
   const pizzas = useSelector((state) => state.cart.items);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
 
-  const [totalCount, setTotalCount] = useState(
-    pizzas.reduce((sum, item) => sum + item.count, 0)
-  );
+  const totalCount = pizzas.reduce((sum, item) => sum + item.count, 0);
   const hendlDelite = () => {
-    dispatch(clearItems())
-    setTotalCount('0');
+    dispatch(clearItems());
   };
   const dispatch = useDispatch();
   return (
@@ -90,14 +87,12 @@ function Cart() {
                 />
               </svg>
 
-              <span onClick={hendlDelite}>
-                Очистить корзину
-              </span>
+              <span onClick={hendlDelite}>Очистить корзину</span>
             </div>
           </div>
           <div className="content__items">
             {pizzas.map((obj) => (
-              <CartPizzas key={obj.id} {...obj} />
+              <CartItem key={obj.id} {...obj} />
             ))}
           </div>
         </div>

@@ -24,12 +24,21 @@ const cartSlice = createSlice({
     },
 
     removeItem: (state, { payload }) => {
-      state.items = state.items.filter((obj) => obj.id !== payload);
+      const itemToRemove = state.items.find((obj) => obj.id === payload);
+      state.totalPrice -= itemToRemove.count * itemToRemove.price;
+      const items = state.items.filter((obj) => obj.id !== payload);
+      state.items = items;
     },
     clearItems: (state) => {
       state.items = [];
+      state.totalPrice = 0;
+    },
+    minusItem: (state, { payload }) => {
+      const item = state.items.find((obj) => obj.id === payload);
+      item.count--;
+      state.totalPrice -= item.price;
     },
   },
 });
-export const { addItem, clearItems, removeItem } = cartSlice.actions;
+export const { addItem, clearItems, removeItem, minusItem } = cartSlice.actions;
 export default cartSlice.reducer;
