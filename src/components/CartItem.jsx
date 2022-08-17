@@ -20,7 +20,7 @@ function CartItem({ id, name, price, count, imageUrl, type, size }) {
       <div className="cart__item-info">
         <h3>{name}</h3>
         <p>
-          {type}, {size}
+          {type}, {size} см.
         </p>
       </div>
       <div className="cart__item-count">
@@ -74,7 +74,10 @@ function CartItem({ id, name, price, count, imageUrl, type, size }) {
       <div className="cart__item-price">
         <b>{price * count} р.</b>
       </div>
-      <div onClick={() => dispatch(removeItem(id))} className="cart__item-remove">
+      <div
+        onClick={() => dispatch(removeItem(id))}
+        className="cart__item-remove"
+      >
         <div className="button button--outline button--circle">
           <svg
             width="10"
