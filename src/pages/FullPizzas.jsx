@@ -1,16 +1,46 @@
-import React from 'react'
-
+import React, { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 function FullPizzas() {
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+
+  React.useEffect(() => {
+    async function fetchPizza() {
+      try {
+        const { data } = await axios.get(
+          `https://62d15c8ddccad0cf1765fbd3.mockapi.io/items/` + id
+        );
+        setData(data);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+    fetchPizza();
+  }, []);
+  if (!data) {
+    return "загрузка";
+  }
+
   return (
-    <div>FullPizzas
-        
-        <img src="@img" alt=""/>
-        <h2>PIZZZZZa</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum iure corporis iste dolor officiis mollitia illum provident omnis tenetur amet eius eligendi, sit nam fuga, quo officia saepe! Hic?
-        </p>
-        <h4>250 руб</h4>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
+      <img
+        style={{ width: "100%", maxWidth: "400px" }}
+        src={data.imageUrl}
+        alt="пицца"
+      />
+      <h2>{data.name}</h2>
+
+      <h4>{data.price} руб</h4>
     </div>
-  )
+  );
 }
 
-export default FullPizzas
+export default FullPizzas;
