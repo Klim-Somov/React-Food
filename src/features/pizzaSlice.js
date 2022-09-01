@@ -3,9 +3,9 @@ import axios from "axios";
 
 export const fetchPizzas = createAsyncThunk(
   "pizzas/fetchPizzas",
-  async ({ serarchBycategory, search, sortObject }) => {
+  async ({ serarchBycategory, search, sort }) => {
     const { data } = await axios.get(
-      `https://62d15c8ddccad0cf1765fbd3.mockapi.io/items?${serarchBycategory}&sortBy=${sortObject.sortProperty}&order=desc${search}`
+      `https://62d15c8ddccad0cf1765fbd3.mockapi.io/items?${serarchBycategory}&sortBy=${sort.sortProperty}&order=desc${search}`
     );
     return data;
   }

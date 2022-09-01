@@ -10,7 +10,7 @@ import "./scss/app.scss";
 
 function App() {
   const [searchValue, setSearchValue] = useState('')
-  console.log(searchValue)
+
   return (
     <div className="wrapper">
       <Header searchValue = {searchValue} setSearchValue={setSearchValue} />
