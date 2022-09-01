@@ -5,14 +5,15 @@ import Categories from "../components/Categories";
 import Loader from "../components/Loader";
 import PizzaBlock from "../components/PizzaBlock";
 import Sort from "../components/Sort";
-import { fetchPizzas } from "../features/pizzaSlice";
+import { filterSelector } from "../features/filterSlice";
+import { fetchPizzas, pizzasSelector } from "../features/pizzaSlice";
 import Pagination from "../pagination/Pagination";
 
-function Home({ searchValue }) {
+const Home = ({ searchValue }) => {
   const dispatch = useDispatch();
   
-  const { items, status } = useSelector((store) => store.pizzas);
-  const {sort, categoryId} = useSelector((store) => store.filter);
+  const { items, status } = useSelector(pizzasSelector);
+  const {sort, categoryId} = useSelector(filterSelector);
 
   const search = searchValue ? `search=${searchValue}` : "";
   

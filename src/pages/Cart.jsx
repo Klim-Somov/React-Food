@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../components/CartItem";
-import { clearItems } from "../features/cartSlice";
+import { cartSelector, clearItems } from "../features/cartSlice";
 import CartEmpty from "./CartEmpty";
 
 function Cart() {
-  const pizzas = useSelector((state) => state.cart.items);
-  const totalPrice = useSelector((state) => state.cart.totalPrice);
+  const {items, totalPrice} = useSelector(cartSelector);
+  
 
-  const totalCount = pizzas.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const hendlDelite = () => {
     dispatch(clearItems());
   };
@@ -17,7 +17,7 @@ function Cart() {
 
   return (
    <>
-    { pizzas.length ?  <div className="content">
+    { items.length ?  <div className="content">
         <div className="container container--cart">
           <div className="cart">
             <div className="cart__top">
@@ -95,7 +95,7 @@ function Cart() {
               </div>
             </div>
             <div className="content__items">
-              {pizzas.map((obj) => (
+              {items.map((obj) => (
                 <CartItem key={obj.id} {...obj} />
               ))}
             </div>
