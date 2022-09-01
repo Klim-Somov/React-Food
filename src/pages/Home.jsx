@@ -11,12 +11,12 @@ import Pagination from "../pagination/Pagination";
 
 const Home = ({ searchValue }) => {
   const dispatch = useDispatch();
-  
+
   const { items, status } = useSelector(pizzasSelector);
-  const {sort, categoryId} = useSelector(filterSelector);
+  const { sort, categoryId } = useSelector(filterSelector);
 
   const search = searchValue ? `search=${searchValue}` : "";
-  
+
   const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
   const serarchBycategory = categoryId > 0 ? `category=${categoryId}` : "";
 
@@ -49,6 +49,6 @@ const Home = ({ searchValue }) => {
       <Pagination />
     </>
   );
-}
+};
 
 export default Home;
