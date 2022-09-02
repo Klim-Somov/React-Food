@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-function FullPizzas() {
+
+const FullPizzas: React.FC = () => {
   const { id } = useParams();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<{
+    name: string;
+    price: number;
+    imageUrl: string;
+  }>();
 
   React.useEffect(() => {
     async function fetchPizza() {
@@ -12,14 +17,14 @@ function FullPizzas() {
           `https://62d15c8ddccad0cf1765fbd3.mockapi.io/items/` + id
         );
         setData(data);
-      } catch (error) {
-        alert(error.message);
+      } catch(e) {
+        alert(e);
       }
     }
     fetchPizza();
   }, []);
   if (!data) {
-    return "загрузка";
+    return <>"загрузка"</>;
   }
 
   return (
@@ -41,6 +46,6 @@ function FullPizzas() {
       <h4>{data.price} руб</h4>
     </div>
   );
-}
+};
 
 export default FullPizzas;
