@@ -1,4 +1,4 @@
-import React from 'react'
+
 import EmptyImg from '../assets/img/empty-cart.png'
 
 

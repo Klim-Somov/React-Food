@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setSortType } from "../features/filterSlice";
+import { filterSortSelector, setSortType } from "../features/filterSlice";
 
 function Sort() {
-  const sortObject = useSelector((state) => state.filter.sort);
+  const sortObject = useSelector(filterSortSelector);
   const dispatch = useDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const sortRef = React.useRef();
-  const poupList = [
+  const sortRef = React.useRef<HTMLDivElement>(null);
+console.log(sortObject);
+
+  type PopupList = {
+    name: string;
+    sortProperty: string;
+  };
+
+  const popupList:PopupList[]  = [
     { name: "популярности", sortProperty: "rating" },
     { name: "цене", sortProperty: "price" },
     { name: "алфавиту", sortProperty: "title" },
   ];
 
-  const onClickHendl = (obj) => {
+  const onClickHendl =(obj:PopupList) => {
     dispatch(setSortType(obj));
     setIsPopupOpen(false);
   };
 
   useEffect(() => {
-    const hendleClickOutside = (e) => {
+    const hendleClickOutside = (e:any) => {
       if (!e.path.includes(sortRef.current)) {
         setIsPopupOpen(false);
       }
@@ -53,7 +60,7 @@ function Sort() {
       {isPopupOpen && (
         <div className="sort__popup">
           <ul>
-            {poupList.map((obj, i) => {
+            {popupList.map((obj, i) => {
               return (
                 <li
                   onClick={() => onClickHendl(obj)}

@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setCategoryId } from "../features/filterSlice";
+import {
+  filterCategoryIdSelector,
+  setCategoryId,
+} from "../features/filterSlice";
 
-function Categories({ onClickCategory }) {
-
-
+const Categories: React.FC = () => {
   const dispatch = useDispatch();
-  const categoryId = useSelector((store) => store.filter.categoryId);
- 
+  const categoryId = useSelector(filterCategoryIdSelector);
 
   const categoriesList = [
     "Все",
@@ -23,7 +23,7 @@ function Categories({ onClickCategory }) {
         {categoriesList.map((cat, i) => {
           return (
             <li
-              onClick={() => dispatch(setCategoryId(i)) }
+              onClick={() => dispatch(setCategoryId(i))}
               key={i}
               className={categoryId === i ? "active" : ""}
             >
@@ -34,6 +34,6 @@ function Categories({ onClickCategory }) {
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;
