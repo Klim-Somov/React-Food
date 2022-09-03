@@ -8,6 +8,10 @@ function Sort() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
+  type PopupClick = MouseEvent & {
+    path: Node[];
+  };
+
   type PopupList = {
     name: string;
     sortProperty: string;
@@ -25,8 +29,9 @@ function Sort() {
   };
 
   useEffect(() => {
-    const hendleClickOutside = (e: any) => {
-      if (!e.path.includes(sortRef.current)) {
+    const hendleClickOutside = (e: MouseEvent) => {
+      const _e = e as PopupClick;
+      if (sortRef.current && !_e.path.includes(sortRef.current)) {
         setIsPopupOpen(false);
       }
     };

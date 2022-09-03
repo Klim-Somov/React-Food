@@ -5,7 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 type SearchProps = {
   searchValue: string | number;
-  setSearchValue: any;
+  setSearchValue: (i: number|string) => void;
 };
 const Search: React.FC<SearchProps> = ({ searchValue, setSearchValue }) => {
   return (
