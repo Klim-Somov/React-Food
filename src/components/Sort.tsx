@@ -7,26 +7,25 @@ function Sort() {
   const dispatch = useDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
-console.log(sortObject);
 
   type PopupList = {
     name: string;
     sortProperty: string;
   };
 
-  const popupList:PopupList[]  = [
+  const popupList: PopupList[] = [
     { name: "популярности", sortProperty: "rating" },
     { name: "цене", sortProperty: "price" },
     { name: "алфавиту", sortProperty: "title" },
   ];
 
-  const onClickHendl =(obj:PopupList) => {
+  const onClickHendl = (obj: PopupList) => {
     dispatch(setSortType(obj));
     setIsPopupOpen(false);
   };
 
   useEffect(() => {
-    const hendleClickOutside = (e:any) => {
+    const hendleClickOutside = (e: any) => {
       if (!e.path.includes(sortRef.current)) {
         setIsPopupOpen(false);
       }

@@ -1,9 +1,13 @@
 import React from "react";
 import styles from "./search.module.scss";
 import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
-const Search = ({ searchValue, setSearchValue }) => {
+type SearchProps = {
+  searchValue: string | number;
+  setSearchValue: any;
+};
+const Search: React.FC<SearchProps> = ({ searchValue, setSearchValue }) => {
   return (
     <div className={styles.root}>
       <SearchIcon />
@@ -12,7 +16,7 @@ const Search = ({ searchValue, setSearchValue }) => {
         onChange={(e) => setSearchValue(e.target.value)}
         placeholder="поиск пицц..."
       />
-      { searchValue && <CloseIcon onClick={() => setSearchValue('')}/>}
+      {searchValue && <CloseIcon onClick={() => setSearchValue("")} />}
     </div>
   );
 };
