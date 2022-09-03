@@ -4,14 +4,14 @@ import styles from "./pagination.module.scss";
 
 
 
-const Pagination: React.FC= () => {
+const Pagination: React.FC= ({onChangePage}) => {
   return (
     <>
       <ReactPaginate
         className={styles.root}
         breakLabel="..."
         nextLabel=" >"
-        onPageChange={(e) => console.log(e)}
+        onPageChange={(e) => onChangePage(e.selected +1)}
         pageRangeDisplayed={6}
         pageCount={3}
         previousLabel="< "

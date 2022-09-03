@@ -1,5 +1,4 @@
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Categories from "../components/Categories";
 import Loader from "../components/Loader";
@@ -10,34 +9,37 @@ import { fetchPizzas, pizzasSelector } from "../features/pizzaSlice";
 import Pagination from "../components/pagination/Pagination";
 
 type HomeProps = {
-  searchValue: string | number
-}
+  searchValue: string | number;
+};
 const Home: React.FC<HomeProps> = ({ searchValue }) => {
   const dispatch = useDispatch();
 
   const { items, status } = useSelector(pizzasSelector);
-  const { sort, categoryId} = useSelector(filterSelector);
-
+  const { sort, categoryId } = useSelector(filterSelector);
+  const [currentPage, setCurrentPage] = useState(1);
   const search = searchValue ? `search=${searchValue}` : "";
 
-  const pizzas = items.map((pizza:any) => <PizzaBlock key={pizza.id} {...pizza} />);
+  const pizzas = items.map((pizza: any) => (
+    <PizzaBlock key={pizza.id} {...pizza} />
+  ));
   const serarchBycategory = categoryId > 0 ? `category=${categoryId}` : "";
 
   const getPizzas = async () => {
     dispatch(
       //@ts-ignore
-      fetchPizzas({ serarchBycategory, search, sort }));
+      fetchPizzas({ serarchBycategory, search, sort, currentPage })
+    );
     window.scrollTo(0, 0);
   };
 
   useEffect(() => {
     getPizzas();
-  }, [searchValue, categoryId, sort]);
+  }, [searchValue, categoryId, sort, currentPage]);
 
   return (
     <>
       <div className="content__top">
-        <Categories  />
+        <Categories />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
@@ -51,7 +53,7 @@ const Home: React.FC<HomeProps> = ({ searchValue }) => {
         </div>
       )}
 
-      <Pagination />
+      <Pagination onChangePage={setCurrentPage}/>
     </>
   );
 };
