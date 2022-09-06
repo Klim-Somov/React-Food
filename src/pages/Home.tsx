@@ -30,6 +30,7 @@ const Home: React.FC<HomeProps> = ({ searchValue }) => {
       fetchPizzas({ serarchBycategory, search, sort, currentPage })
     );
     window.scrollTo(0, 0);
+    
   };
 
   useEffect(() => {
