@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Rootstate } from "../app/store";
 
 type CartItem = {
   id: string;
@@ -58,8 +59,8 @@ const cartSlice = createSlice({
   },
 });
 
-export const cartSelector = (state) => state.cart;
-export const cartItemsSelector = (state) => state.cart.items;
+export const cartSelector = (state: Rootstate) => state.cart;
+export const cartItemsSelector = (state: Rootstate) => state.cart.items;
 
 export const { addItem, clearItems, removeItem, minusItem } = cartSlice.actions;
 
