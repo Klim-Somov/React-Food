@@ -40,7 +40,9 @@ const cartSlice = createSlice({
 
     removeItem: (state, { payload }) => {
       const itemToRemove = state.items.find((obj) => obj.id === payload);
-      state.totalPrice -= itemToRemove.count * itemToRemove.price;
+      if (itemToRemove)
+        state.totalPrice -= itemToRemove.count * itemToRemove.price;
+
       const items = state.items.filter((obj) => obj.id !== payload);
       state.items = items;
     },
@@ -50,8 +52,8 @@ const cartSlice = createSlice({
     },
     minusItem: (state, { payload }) => {
       const item = state.items.find((obj) => obj.id === payload);
-      item.count--;
-      state.totalPrice -= item.price;
+      if (item) item.count--;
+      if (item) state.totalPrice -= item.price;
     },
   },
 });
