@@ -8,6 +8,18 @@ type fetchPizzasProps = {
   sort: any;
   currentPage: number;
 };
+
+enum Status {
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
+}
+
+type PizzaSliceState = {
+  items: [];
+  status: Status;
+};
+
 export const fetchPizzas = createAsyncThunk(
   "pizzas/fetchPizzas",
   async (params: fetchPizzasProps) => {
@@ -20,9 +32,9 @@ export const fetchPizzas = createAsyncThunk(
   }
 );
 
-const initialState = {
+const initialState: PizzaSliceState = {
   items: [],
-  status: "loading",
+  status: Status.LOADING,
 };
 
 const pizzaSlice = createSlice({
@@ -35,17 +47,17 @@ const pizzaSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPizzas.pending, (state) => {
-      state.status = "loading";
+      state.status = Status.LOADING;
       state.items = [];
       console.log("Идет отправка запроса");
     });
     builder.addCase(fetchPizzas.rejected, (state) => {
-      state.status = "error";
+      state.status = Status.ERROR;
       state.items = [];
-      console.log("ошибка в получении пицц");
+      console.log("Ошибка в получении пицц");
     });
-    builder.addCase(fetchPizzas.fulfilled, (state, { payload}) => {
-      state.status = "success";
+    builder.addCase(fetchPizzas.fulfilled, (state, { payload }) => {
+      state.status = Status.SUCCESS;
       state.items = payload;
       console.log("Пиццы загружены");
     });
