@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Categories from "../components/Categories";
 import Loader from "../components/Loader";
 import PizzaBlock from "../components/PizzaBlock";
@@ -7,12 +7,13 @@ import Sort from "../components/Sort";
 import { filterSelector } from "../features/filterSlice";
 import { fetchPizzas, pizzasSelector } from "../features/pizzaSlice";
 import Pagination from "../components/pagination/Pagination";
+import { useAppDispatch } from "../app/store";
 
 type HomeProps = {
   searchValue: string | number;
 };
 const Home: React.FC<HomeProps> = ({ searchValue }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { items, status } = useSelector(pizzasSelector);
   const { sort, categoryId } = useSelector(filterSelector);
@@ -25,12 +26,8 @@ const Home: React.FC<HomeProps> = ({ searchValue }) => {
   const serarchBycategory = categoryId > 0 ? `category=${categoryId}` : "";
 
   const getPizzas = async () => {
-    dispatch(
-      //@ts-ignore
-      fetchPizzas({ serarchBycategory, search, sort, currentPage })
-    );
+    dispatch(fetchPizzas({ serarchBycategory, search, sort, currentPage }));
     window.scrollTo(0, 0);
-    
   };
 
   useEffect(() => {
@@ -54,7 +51,7 @@ const Home: React.FC<HomeProps> = ({ searchValue }) => {
         </div>
       )}
 
-      <Pagination onChangePage={setCurrentPage}/>
+      <Pagination onChangePage={setCurrentPage} />
     </>
   );
 };
