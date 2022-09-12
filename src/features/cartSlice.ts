@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Rootstate } from "../app/store";
 
-type CartItem = {
+export type CartItem = {
   id: string;
   name: string;
   price: number;
@@ -11,12 +11,12 @@ type CartItem = {
   size: number;
 };
 
-interface CartSliceState {
+type CartSliceState = {
   totalPrice: number;
   items: CartItem[];
 }
 
-const initialState: CartSliceState = {
+const initialState:CartSliceState = {
   totalPrice: 0,
   items: [],
 };
